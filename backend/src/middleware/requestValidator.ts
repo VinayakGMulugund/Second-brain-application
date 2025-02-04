@@ -12,7 +12,7 @@ const userRegistrationSchema = z.object({
 });
 
 
-const validateUserCreationData = (req: Request, res: Response, next: NextFunction) => {
+const validateUserRequest = (req: Request, res: Response, next: NextFunction) => {
     try {
         userRegistrationSchema.parse(req.body);
         next();
@@ -25,4 +25,4 @@ const validateUserCreationData = (req: Request, res: Response, next: NextFunctio
     }
 }
 
-export {validateUserCreationData}
+export {validateUserRequest}
