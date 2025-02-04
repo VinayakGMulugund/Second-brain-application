@@ -7,7 +7,8 @@ const userRegistrationSchema = z.object({
     password: z.string().min(8).max(20)
         .regex(new RegExp('[a-z]'), 'Atleast one lowercase letter required')
         .regex(new RegExp('[A-Z]'), "Atleast one uppercase letter required")
-        .regex(new RegExp("_|[^\w]"), "Atleast one special character required")
+        .regex(new RegExp("[!@#$%^&*()_+=;]"), "Atleast one special character required")
+        .regex(new RegExp('.*[0-9].*'), "Atleast one number is required")
 });
 
 
@@ -18,9 +19,9 @@ const validateUserCreationData = (req: Request, res: Response, next: NextFunctio
     } catch (error) {
         console.log('Body:', req.body);
         if (error instanceof ZodError) {
-            res.json(error);
+            res.status(411).json(error);
         }
-        else res.json({ message: "Failed to validate input request paylod"})
+        else res.status(500).json({ message: "Failed to validate input request paylod"})
     }
 }
 

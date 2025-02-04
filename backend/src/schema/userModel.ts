@@ -1,3 +1,4 @@
+import { Request, Response } from "express";
 import { model, Schema } from "mongoose";
 
 
